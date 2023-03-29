@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import "./index.scss";
 
-export default function InputNumber() {
+export default function InputNumber(props) {
   const { value, placeholder, name, min, max, prefix, suffix } = props;
   const [InputValue, setInputValue] = useState(`${prefix}${value}${suffix}`);
 
@@ -74,14 +74,14 @@ export default function InputNumber() {
   );
 }
 
-Number.defaultProps = {
+InputNumber.defaultProps = {
   min: 1,
   max: 1,
   prefix: "",
   suffix: "",
 };
 
-Number.propTypes = {
+InputNumber.propTypes = {
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   placeholder: propTypes.string,
