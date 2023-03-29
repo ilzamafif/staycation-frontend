@@ -2,15 +2,16 @@ import React from "react";
 import Button from "components/Button";
 import BrandIcon from "parts/IconText";
 import { useLocation } from 'react-router-dom'
+import Fade from "react-reveal/Fade";
 
 export default function Header(props) {
   const location = useLocation();
   const getNavLinkClass = (path) => {
-    return location.pathname === path ? "active" : ""
-  }
+    return location.pathname === path ? "active" : "";
+  };
 
- 
   return (
+    <Fade>
       <header className="spacing-sm">
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light">
@@ -42,5 +43,6 @@ export default function Header(props) {
           </nav>
         </div>
       </header>
+    </Fade>
   );
 }
