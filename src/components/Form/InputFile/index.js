@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import propTypes from "prop-types";
 
-import "./index.scss";
-
 export default function File(props) {
   const {
     value,
@@ -32,7 +30,7 @@ export default function File(props) {
           className="d-none"
           type="file"
           value={value}
-          onChange={onChange}
+          onChange={props.onChange}
         />
         <input
           onClick={() => refInputFile.current.click()}
