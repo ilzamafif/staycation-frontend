@@ -5,11 +5,11 @@ import PageDetailTitle from "parts/PageDetailTitle";
 import FeaturedImage from "parts/FeaturedImage";
 import PageDetailDescription from "parts/PageDetailDescription";
 import BookingForm from "parts/BookingForm";
-import Categories from "parts/Categories";
+import Activities from "parts/Activities";
 import Testimony from "parts/Testimony";
 import Footer from "parts/Footer";
 
-import itemDetails from "json/itemDetails.json";
+import { fetchPage } from "store/actions/page";
 
 import Fade from "react-reveal/Fade";
 
@@ -20,43 +20,59 @@ class DetailsPage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     window.title = "Details Page";
+
+    if (!this.props.page[this.props.match.params.id])
+      this.props.fetchPage(
+        `${process.env.REACT_APP_HOST}/api/v1/member/detail-page/${this.props.match.params.id}`,
+        this.props.match.params.id
+      );
   }
 
   render() {
+    const { page, match } = this.props;
     const breadcrumb = [
       { pageTitle: "Home", pageHref: "" },
       { pageTitle: "House Details", pageHref: "" },
     ];
 
+    if (!page[match.params.id]) return null;
+
     return (
       <>
         <Header {...this.props} />
-        <PageDetailTitle breadcrumb={breadcrumb} data={itemDetails} />
-        <FeaturedImage data={itemDetails.imageUrls} />
+        <PageDetailTitle breadcrumb={breadcrumb} data={page[match.params.id]} />
+        <FeaturedImage data={page[match.params.id].imageId} />
         <section className="container">
           <div className="row">
             <div className="col-7 pr-5">
               <Fade bottom>
-                <PageDetailDescription data={itemDetails} />
+                <PageDetailDescription data={page[match.params.id]} />
               </Fade>
             </div>
             <div className="col-5">
               <Fade bottom>
                 <BookingForm
-                  itemDetails={itemDetails}
-                  startBooking={this.props.checkoutBooking}
+                  itemDetails={page[match.params.id]}
+                  startBooking={page[match.params.id].checkoutBooking}
                 />
               </Fade>
             </div>
           </div>
         </section>
 
-        <Categories data={itemDetails.categories} />
-        <Testimony data={itemDetails.testimonial} />
+        <Activities data={page[match.params.id].activityId} />
+        <Testimony data={page[match.params.id].testimonial} />
         <Footer />
       </>
     );
   }
 }
 
-export default connect(null, { checkoutBooking })(DetailsPage);
+const mapStateToProps = (state) => ({
+  checkout: state.checkout,
+  page: state.page,
+});
+
+export default connect(mapStateToProps, { checkoutBooking, fetchPage })(
+  DetailsPage
+);
