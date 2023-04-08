@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 import DetailsPage from "./pages/DetailsPage";
 import Example from "./pages/Example";
 import Checkout from "./pages/Checkout";
@@ -11,12 +11,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/properties/:id" element={<DetailsPage />} />
-          <Route path="/example" element={<Example />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/properties/:id" component={DetailsPage} />
+          <Route path="/example" component={Example} />
+          <Route path="/checkout" component={Checkout} />
+        </Switch>
       </Router>
     </div>
   );
