@@ -53,7 +53,7 @@ class DetailsPage extends Component {
               <Fade bottom>
                 <BookingForm
                   itemDetails={page[match.params.id]}
-                  startBooking={page[match.params.id].checkoutBooking}
+                  startBooking={this.props.checkoutBooking}
                 />
               </Fade>
             </div>

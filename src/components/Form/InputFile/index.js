@@ -13,7 +13,19 @@ export default function File(props) {
     inputClassName,
   } = props;
 
+  const [FileName, setFileName] = useState("");
+
   const refInputFile = useRef(null);
+
+  const onChange = (event) => {
+    setFileName(event.target.value);
+    props.onChange({
+      target: {
+        name: event.target.name,
+        value: event.target.files,
+      },
+    });
+  };
 
   return (
     <div className={["input-text mb-3", outerClassName].join(" ")}>
@@ -29,12 +41,12 @@ export default function File(props) {
           name={name}
           className="d-none"
           type="file"
-          value={value}
-          onChange={props.onChange}
+          value={FileName}
+          onChange={onChange}
         />
         <input
           onClick={() => refInputFile.current.click()}
-          defaultValue={value}
+          defaultValue={FileName}
           placeholder={placeholder}
           className={["form-control", inputClassName].join(" ")}
         />
