@@ -6,6 +6,7 @@ import Example from "./pages/Example";
 import Checkout from "./pages/Checkout";
 
 import "./assets/scss/style.scss";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/checkout" component={Checkout} />
         </Switch>
       </Router>
+
+      <ToastContainer></ToastContainer>
     </div>
   );
 }
