@@ -2,8 +2,13 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 
 import Breadcrumb from "components/Breadcrumb";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+export default function PageDetailTitle({ breadcrumb }) {
+  const page = useSelector((state) => state.page);
+  const [id] = useParams();
 
-export default function PageDetailTitle({ data, breadcrumb }) {
+  const data = page?.[id] || {};
   return (
     <section className="container spacing-sm">
       <Fade bottom>
