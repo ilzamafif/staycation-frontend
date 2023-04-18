@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 export default function FeaturedImage() {
   const page = useSelector((state) => state.page);
-  const [id] = useParams();
+  const { id } = useParams();
 
   const data = page?.[id]?.imageId || [];
 

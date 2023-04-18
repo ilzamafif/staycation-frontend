@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { createBrowserHistory } from "history";
 import LandingPage from "./pages/LandingPage";
-import DetailsPage from "./pages/DetailsPage_";
+import DetailsPage from "./pages/DetailsPage";
 import Example from "./pages/Example";
 import Checkout from "./pages/Checkout";
 import "./assets/scss/style.scss";

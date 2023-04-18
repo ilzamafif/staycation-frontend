@@ -17,7 +17,7 @@ import Footer from "parts/Footer";
 
 function DetailsPage() {
   const page = useSelector((state) => state.page);
-  const [id] = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const breadcrumb = [

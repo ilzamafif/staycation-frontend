@@ -3,23 +3,15 @@ import { InputDate, InputNumber } from "components/Form";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { checkoutBooking } from "store/actions/checkout";
 
 function BookingForm_() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const page = useSelector((state) => state.page);
-  const [id] = useParams();
+  const { id } = useParams();
   const itemDetails = page?.[id] || {};
-
-  const [data, setData] = useState({
-    duration: 1,
-    date: {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  });
-
 
   function updateData(event) {
     let startDate, endDate, duration;
@@ -28,8 +20,9 @@ function BookingForm_() {
       startDate = new Date(data.date.startDate);
       endDate = new Date(data.date.startDate);
       endDate.setDate(startDate.getDate() + +event.target.value);
-
       endDate = new Date(endDate);
+
+      duration = endDate.getDate() - startDate.getDate();
 
     } else if (event.target.name === "date") {
       startDate = new Date(event.target.value.startDate);
@@ -38,21 +31,27 @@ function BookingForm_() {
 
     }
 
+    setData((prev) => ({
+      ...prev,
+      date: {
+        ...prev.date,
+        startDate,
+        endDate
+      },
+      duration
+    }))
+      ;
 
 
   }
-  setData((prev) => ({
-    ...prev,
+  const [data, setData] = useState({
+    duration: 1,
     date: {
-      ...prev.date,
-      startDate,
-      endDate
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
     },
-    duration
-  }))
-
-
-
+  });
 
   function startBooking() {
     dispatch(
@@ -67,6 +66,7 @@ function BookingForm_() {
     )
     navigate("/checkout");
   };
+
 
   return (
     <div className="card bordered" style={{ padding: "60px 80px" }}>

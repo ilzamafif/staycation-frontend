@@ -214,7 +214,7 @@ class Checkout extends Component {
                     isBlock
                     isPrimary
                     hasShadow
-                    href=""
+                    href="/"
                   >
                     Back to Home
                   </Button>
